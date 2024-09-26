@@ -411,7 +411,7 @@ func (m *Memberlist) probeNode(node *nodeState) {
 		// probe interval it will give the TCP fallback more time, which
 		// is more active in dealing with lost packets, and it gives more
 		// time to wait for indirect acks/nacks.
-		m.logger.Printf("[DEBUG] memberlist: Failed UDP ping: %s (timeout reached)", node.Name)
+		m.logger.Printf("[DEBUG] memberlist: [2] Failed UDP ping: %s (timeout reached), %s", node.Name, m.config.Name)
 	}
 
 HANDLE_REMOTE_FAILURE:
@@ -559,7 +559,7 @@ func (m *Memberlist) Ping(node string, addr net.Addr) (time.Duration, error) {
 		// Timeout, return an error below.
 	}
 
-	m.logger.Printf("[DEBUG] memberlist: Failed UDP ping: %v (timeout reached)", node)
+	m.logger.Printf("[DEBUG] memberlist: [1] Failed UDP ping: %v (timeout reached), %s", node, m.config.Name)
 	return 0, NoPingResponseError{ping.Node}
 }
 

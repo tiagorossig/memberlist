@@ -325,7 +325,7 @@ func (m *Memberlist) handleConn(conn net.Conn) {
 		}
 
 		if p.Node != "" && p.Node != m.config.Name {
-			m.logger.Printf("[WARN] memberlist: Got ping for unexpected node %s %s", p.Node, LogConn(conn))
+			m.logger.Printf("[WARN] memberlist: [1] Got ping for unexpected node %s %s %s", p.Node, m.config.Name, LogConn(conn))
 			return
 		}
 
@@ -556,7 +556,7 @@ func (m *Memberlist) handlePing(buf []byte, from net.Addr) {
 	}
 	// If node is provided, verify that it is for us
 	if p.Node != "" && p.Node != m.config.Name {
-		m.logger.Printf("[WARN] memberlist: Got ping for unexpected node '%s' %s", p.Node, LogAddress(from))
+		m.logger.Printf("[WARN] memberlist: [2] Got ping for unexpected node '%s' %s %s", p.Node, m.config.Name, LogAddress(from))
 		return
 	}
 	var ack ackResp
